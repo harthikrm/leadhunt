@@ -195,3 +195,106 @@ _Visa caveat: all JD pages 403'd, so buckets are inferred, not JD-verified._
 - SimplifyJobs DS/AI/ML section (37 roles) went unread due to README truncation — try fetching its raw listings JSON or paginating.
 
 ---
+
+## Run: 2026-06-20 18:35 (DEEP BACKFILL — 30 day window)
+
+**SECOND DEEP BACKFILL of the day** (a prior backfill ran 05:21). Same 30-day
+window (~May 21 – Jun 20). This pass re-swept the readable trackers for rows the
+05:21/12:00 runs did NOT log, and re-attempted every community board. Everything
+already logged earlier today is de-duped out below — only **NEW** rows appear.
+
+**Coverage & honesty notes (read before trusting anything below):**
+- **Fully covered (readable):** `speedyapply/2026-AI-College-Jobs` →
+  `NEW_GRAD_USA.md`, loaded in full via `raw.githubusercontent.com` (117 rows,
+  ages 0d–52d). This is the one consistently machine-readable, dated,
+  directly-linked source. All NEW leads below come from it unless marked otherwise.
+- **Degraded this run:** `jobright-ai/2026-Data-Analysis-New-Grad` README now
+  renders only "last 7 days" with **relative/ambiguous dates** (the fetcher read
+  them as 2025) — **not usable for new dated rows this run.** No new jobright rows logged.
+- **NOT covered / blocked (be explicit):**
+  - **Community boards — ALL blocked again:** HN thread 48357725 via Algolia
+    items API, Algolia search API, AND `hnrss.org` → all **HTTP 403**.
+    `startup.jobs` → 403. Reddit "who is hiring" → web search returned only
+    stale/2025 aggregator pages, no current datable thread. **Nothing logged from
+    any community board.** Net finding for future daily runs: HN/Reddit/startup.jobs
+    remain unreadable by this fetcher — do not budget on them until an
+    authenticated/feed path is found.
+  - **Individual JD verification — ALL still blocked (HTTP 403):** workday, ashby,
+    greenhouse, etc. Every visa bucket below is **inferred from company type + role,
+    NOT JD text.** Every "verify" must be opened manually.
+  - LinkedIn / Indeed / Glassdoor / Wellfound: aggregator landing pages only;
+    LinkedIn `/jobs/view/` URLs are stable but 403 the fetcher (level/visa unread).
+    Captured as informal leads with that caveat — not in main tiers.
+- **De-dup:** cross-checked against ALL prior runs (12:00, 05:21). Skipped as
+  already-logged: Astera Labs, Dealer Tire, Home Depot (Req183993), True Anomaly,
+  Snowflake, NVIDIA LLM-Training, BMS, FNBO, Jerry (SF Bay), KeyBank R-40079, PNC,
+  Unity, Upgrade, Node, Hitachi, Excellus/Univera, Capital One, USAA, Celonis,
+  TreeHouse, Genesis Financial, Marvell, TIFIN, Hyve, Smithfield, GlobalFoundries,
+  Oklahoma State, and all defense/federal/research/non-US exclusions (True Anomaly,
+  Inversion, Sierra Nevada, A-TEK, Everwatch, Lentech, Booz Allen, Radiance, CMU
+  Secure-AI noted below, Boeing, Quantiphi, Edwards/Novartis/Thermo/MSD/Flatiron/Emory).
+
+### Tier 1 — Hot & strong fit
+_None clears the Tier-1 bar this run: every JD 403'd (visa unverifiable), and the
+genuinely on-profile NEW rows are all at larger banks/enterprises whose immigration
+policy must be checked first → they sit in Tier 2. Honesty rule keeps Tier 1 empty._
+
+### Tier 2 — Worth a look (NEW this run; caveat is "visa inferred, JD 403" unless noted)
+
+| Company | What they do / size | Role | Direct link | Posted (basis) | Visa posture | Fit note | Source |
+|---|---|---|---|---|---|---|---|
+| Nevoya | Zero-emission freight/trucking logistics startup; early/growth | AI Operations Associate (Texas) | https://jobs.ashbyhq.com/nevoya/3163e7df-5c59-4b8a-a37a-15caf2e543d5 | "8d" (≈Jun 12) | Silent, startup — likely OK | **Austin, TX = candidate-local.** Applied-AI ops at a startup; gap: "Operations Associate" leans ops/process over pure build (also a CA twin: …/ece297a0-f8f2-47dd-9f1e-395662ea7633) | speedyapply NEW_GRAD |
+| Enbridge | Energy/pipeline infrastructure; large | Data Analyst Specialist I – Work Management Technology | https://enbridge.wd3.myworkdayjobs.com/en-US/enbridge_careers/job/Houston-TX-USA/Data-Analyst-Specialist-I--Work-Management-Technology_71806 | "7d" (≈Jun 13) | Silent, larger company — **verify** | **Houston, TX.** Entry Data Analyst; SQL/BI fit; gap: ops-tech domain, large-co policy unread | speedyapply NEW_GRAD |
+| Citi | Global bank; large public | Junior Data Services and AI Developer – Officer | https://citi.wd5.myworkdayjobs.com/en-US/2/job/Jersey-City-New-Jersey-United-States/Junior-Data-Services-and-AI-Developer---Officer_26967855 | "15d" (≈Jun 5) | Silent, larger company — **verify** (big bank → real immigration policy) | Explicit "Junior … AI Developer"; data+AI build fit; gap: bank policy unread | speedyapply NEW_GRAD |
+| Bank of America | Global bank; large public | Data Scientist I – Fraud Model Governance | https://ghr.wd1.myworkdayjobs.com/en-US/us-emplsv/job/Charlotte/Data-Scientist-I----Fraud-Model-Governance_26019387 | "10d" (≈Jun 10) | Silent, larger company — **verify** | Entry DS I; analytics/ML fit; gap: model-governance (not GenAI build) + bank policy | speedyapply NEW_GRAD |
+| Bank of America | Global bank; large public | Client Quantitative Analyst I – Analytics Transformation | https://ghr.wd1.myworkdayjobs.com/en-US/us-emplsv/job/New-York/Client-Quantitative-Analyst-I---Analytics-Transformation_26019832 | "8d" (≈Jun 12) | Silent, larger company — **verify** | Clean **Quantitative Data Analyst (non-trading-floor)** target match; analytics-transformation, not a trading desk; gap: bank policy | speedyapply NEW_GRAD |
+| Morningstar | Investment research/data; mid-large public | Associate Quantitative Analyst | https://morningstar.wd5.myworkdayjobs.com/en-US/confidential/job/Chicago/Associate-Quantitative-Analyst_REQ-055869 | "1d" (≈Jun 19) | Silent, larger company — **verify** | **Quantitative Data Analyst (non-trading-floor)** fit at a data/research firm; strong analytics overlap; gap: finance domain | speedyapply NEW_GRAD |
+| Cypress Creek Renewables | Solar/renewables developer; mid-size | Junior Engineer – AI Automation | https://ccrenew.com/careers/job-listing/?gh_jid=7948197 | "21d" (≈May 30) | Silent, mid-size — likely OK | "Junior … AI Automation" = build-leaning applied-AI; Python/automation fit; gap: recency mid-window, domain-specific | speedyapply NEW_GRAD |
+
+### Tier 3 — Long shots / needs verification / weaker fit (NEW this run)
+
+| Company | What they do | Role | Direct link | Posted | Visa posture | Why Tier 3 | Source |
+|---|---|---|---|---|---|---|---|
+| JustAnswer | Online expert Q&A / AI assistant; mid-size | Associate AI Conversation Designer (Remote) | https://job-boards.greenhouse.io/justanswer/jobs/8587759002 | "8d" (≈Jun 12) (also req …8509749002, "4d") | Silent, mid-size — verify | **Remote** + applied-LLM (conversation/prompt design); adjacent to AI-eng but design-leaning, not core build | speedyapply NEW_GRAD |
+| Loop | Logistics/freight-payments software; growth-stage | AI Operations Associate | https://job-boards.greenhouse.io/loop/jobs/5819779004 | "11d" (≈Jun 9) | Silent, growth startup — likely OK | Applied-AI ops at an AI-forward startup; gap: ops-associate, not eng | speedyapply NEW_GRAD |
+| MiTek | Building-products / construction tech; large | Supply Chain Data Analyst I | https://mii.wd5.myworkdayjobs.com/en-US/mitek/job/StCharles-MO-USA/Supply-Chain-Data-Analyst-I_R06378 | "9d" (≈Jun 11) | Silent, larger company — **verify** | Entry Data Analyst; SQL/analytics fit; gap: supply-chain domain, no AI angle | speedyapply NEW_GRAD |
+| Franklin Templeton | Asset management; large public | Junior Quant Developer | https://franklintempleton.wd5.myworkdayjobs.com/en-US/primary-external-1/job/New-York-New-York-United-States-of-America/Junior-Quant-Developer_868307-1 | "3d" (≈Jun 17) | Silent, larger company — **verify** | Junior quant **developer** (build, not trading desk); Python/SQL fit; gap: finance-quant domain, large-co policy | speedyapply NEW_GRAD |
+| Clear Investment Group | Real-estate investment firm; mid-size | AI Associate | http://clearinvestmentgroup.applytojob.com/apply/GhAjTFH6Km/AI-Associate | "10d" (≈Jun 10) | Silent, mid-size — verify | Generalist "AI Associate"; scope vague (could be ops/enablement vs build) — screen JD | speedyapply NEW_GRAD |
+| DebtBook | Municipal-finance/debt SaaS fintech; growth-stage | Associate Quantitative Strategist | https://job-boards.greenhouse.io/debtbook/jobs/4698960005 | "24d" (≈May 27) | Silent, growth startup — likely OK | Quant/analytics at a fintech SaaS; gap: recency mid-window, "strategist" framing | speedyapply NEW_GRAD |
+| SBT Global | Trading/distribution company; small-mid | Junior Data Analyst – Operations / Sales Analytics | https://jobs.smartrecruiters.com/SBTGlobalInc/3743990013715446-junior-data-analyst-operations-sales-analytics-?oga=true | "0d" (≈Jun 20) | Silent, small — likely OK | Junior DA, ops/sales analytics; SQL/BI fit; gap: small co, no AI angle | speedyapply NEW_GRAD |
+| Carnegie Mellon University | University research lab | Associate Machine Learning Engineer – Secure AI Lab | https://cmu.wd5.myworkdayjobs.com/en-US/cmu/job/Pittsburgh-PA/Associate-Machine-Learning-Engineer---Secure-AI-Lab_2024609 | "11d" (≈Jun 9) | Unclear — **verify** | Entry ML Eng (academic; universities often OPT/CPT-friendly), BUT "Secure AI Lab" may carry funding/citizenship constraints — confirm | speedyapply NEW_GRAD |
+| WorldQuant | Quant investment-management firm; large | Junior Quantitative Analyst | https://job-boards.greenhouse.io/worldquant/jobs/4616499006 | "11d" (≈Jun 9) | Silent, larger company — **verify** | **Austin, TX** + junior quant analyst; analytics/Python fit; gap: research/alpha (trading-adjacent) borders the "non-trading-floor" exclusion — screen | speedyapply NEW_GRAD |
+| KeyBank | Regional bank; large public | Quantitative Analytics Associate – Capital (R-40080) | https://keybank.wd5.myworkdayjobs.com/en-US/external_career_site/job/Brooklyn-OH/Quantitative-Analytics-Associate---Capital_R-40080 | "4d" (≈Jun 16) | Silent, larger company — **verify** | NEW req, distinct from R-40079 logged 05:21; same Quant-Data-Analyst fit; gap: bank policy | speedyapply NEW_GRAD |
+
+### Informal / LinkedIn leads (direct links found, but level + visa UNVERIFIED — LinkedIn 403'd the fetcher)
+_Surfaced via web search for founder/recruiter "Applied AI Engineer" posts. Treat as raw leads to open manually; I could not confirm seniority (some may be senior) or sponsorship. Dates are search-reported May 2026 (within 30d for the later ones)._
+
+| Company | Role | Direct link | Note |
+|---|---|---|---|
+| Vi Labs (vi.co) | Applied AI Engineer – Wellness (Remote) | https://vi.co/careers/applied-ai-engineer-wellness/58.860/ | Real direct careers link. Search indicates Vi's open AI roles skew **Senior/Principal** → likely above target level; also a "Life Sciences & Healthcare" variant exists (only on aggregators remoterocketship/jobgether, no clean direct link). Verify level before applying. |
+| Blossom | Applied AI Software Engineer (All Levels) | https://www.linkedin.com/jobs/view/applied-ai-software-engineer-all-levels-at-blossom-4416493233 | "All Levels" → entry plausibly in scope; LinkedIn page unread |
+| RS Global Services | Applied AI Engineer (Onsite SF/NY) | https://www.linkedin.com/jobs/view/applied-ai-engineer-onsite-sf-ny-at-rs-global-services-4415884394 | ~May 18; onsite; level/visa unread |
+| Fortegra | Applied AI Engineer (Iselin, NJ) | https://www.linkedin.com/jobs/view/applied-ai-engineer-at-fortegra-4402810009 | Insurance/specialty-finance; level/visa unread |
+| Landair Advisors | Applied AI Engineer (New York, NY) | https://www.linkedin.com/jobs/view/applied-ai-engineer-at-landair-advisors-4417382496 | ~May 20; level/visa unread |
+
+### Adjacent titles encountered (NEW this run) — worth adding to search vocabulary
+- **"AI Operations Associate"** (Nevoya, Loop) — applied-AI at startups, but ops/process-leaning vs build. Screen for how much is hands-on engineering.
+- **"Junior … AI Developer / AI Automation Engineer"** (Citi, Cypress Creek) — build-leaning entry AI roles outside the usual "ML Engineer" title; good additions.
+- **"Associate AI Conversation Designer"** (JustAnswer) — applied-LLM/prompt role; design-leaning.
+- Reconfirmed strong quant-analyst targets (non-trading-floor): **"Client Quantitative Analyst I"** (BofA), **"Associate Quantitative Analyst"** (Morningstar), **"Junior Quant Developer"** (Franklin Templeton).
+
+### Excluded this run (logged so future runs don't re-surface)
+- **Quant TRADING-floor / markets-desk (out of scope per "non-trading-floor"):** BlackRock (Quant Modeler ×3), Morgan Stanley (Quant Desk Strategist), AQR (Quant Front Office Eng), Galaxy (Quant Trader – Onchain), Old Mission Capital (Jr Quant Trader), Akuna Capital (Jr Quant Researcher – also >30d at 52d), Cross River Bank (Quant Strategies AVP), Corgi Insurance (Quant Associate), Bank of America "Associate – Quant", Hudson River Trading (Jr Quant Latency Eng), RA Capital (Healthcare AI quant). Trading/alpha desks — excluded; reconsider only the explicitly "analytics"/"developer" titled ones above.
+- **Defense / federal / clearance (US-person near-certain):** already-excluded set unchanged (True Anomaly, Inversion, Sierra Nevada, A-TEK, Everwatch, Lentech, Booz Allen, Radiance, SteerBridge/Yuma).
+- **Research / wet-lab / non-applied-eng:** Edwards, Novartis, Thermo Fisher, MSD, Flatiron, Emory, Illinois/Iowa State, Joslin Diabetes, Revolution Medicines, CLO Virtual Fashion (R&D Research Scientist), Proxima (ICML AI Scientist – conference/research), Figma (Data Scientist – PhD), NVIDIA Research-Scientist roles, DoorDash AI Research Fellowship.
+- **Non-US geography:** Boeing (Richmond, Canada), Amexio (Canada), Quantiphi (India), ZOLL (Israel).
+- **Sales/GTM/legal/hardware (not the target build profile):** Encord (Commercial Associate), Lumenci (CS & GTM Associate), BIP Ventures (Product Owner), CIG Communities (AI Innovation Associate – vague), Astreya (AI Infra DC Design – datacenter hardware), HPE (Electrical HW Eng), Booz Allen (AI Privacy Associate General Counsel), Aptura (IB Associate – AI Residency, part-time, finance).
+
+### Net new this run
+**7 Tier-2 + 10 Tier-3 + 5 informal/LinkedIn = 22 NEW leads** not in any prior run.
+Strongest Texas-local / on-profile picks: **Nevoya (Austin)**, **Enbridge (Houston)**,
+**Bank of America Client Quant Analyst I**, **Morningstar Assoc Quant Analyst**.
+No source beyond the speedyapply tracker was machine-readable this run — community
+boards and JD pages remain fully blocked, so this backfill is **tracker-only coverage**.
+
+---
