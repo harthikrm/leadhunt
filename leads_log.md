@@ -386,3 +386,134 @@ _Surfaced only via a `WebSearch` over `hnhiring.com` (the page itself + HN/Algol
 - **SimplifyJobs** AI/ML category (37 roles) still truncates before loading — try the `dev`-branch raw or a ranged fetch.
 
 ---
+
+## Run: 2026-06-23 17:07 (DEEP BACKFILL — 30 day window)
+
+**THIS IS A ONE-TIME DEEP BACKFILL, NOT A DAILY PASS.** Run with a wider budget
+on a **30-day** recency window (~May 24 – Jun 23) instead of the normal 24h. This
+is the **first run since 2026-06-20** (3-day gap — no daily passes ran Jun 21/22).
+Read `leads_log.md` in full first and de-duped against ALL four prior runs
+(06-20 12:00, 06-20 05:21 backfill, 06-20 18:30, 06-20 18:48 backfill).
+
+**Coverage & honesty notes (READ before trusting anything below):**
+- **Fully covered (loaded via `raw.githubusercontent.com`, NOT blocked):**
+  - `speedyapply/2026-AI-College-Jobs` → `NEW_GRAD_USA.md` — read (returned a
+    short slice this fetch; most rows matched prior runs aged +3–4d).
+  - `zapplyjobs/New-Grad-Data-Science-Positions` — read in full across ML
+    Engineer / Applied AI / Data Engineer / Analytics Engineer / Data Analyst /
+    Data Scientist / BI sections. **Richest source again.**
+  - `jobright-ai/2026-Data-Analysis-New-Grad` (`master`) — loaded; still capped
+    at **"last 7 days only"** (Jun 16–23 rows). 30-day depth unavailable there.
+- **NEW SIGNAL THIS RUN — zapplyjobs now carries a visa-sponsorship column**
+  (`✅ Sponsor` / `H-1B Co.` / `None`). This is **company-level H-1B sponsorship
+  history, NOT JD-confirmed OPT language** — but it's the first machine-readable
+  visa signal any run has had, so I cite it inline as supporting evidence. `None`
+  ≠ "no sponsorship" necessarily; it often just means no recent H-1B filings
+  (common for startups/govt). Treat `✅ Sponsor`/`H-1B Co.` as "immigration-aware
+  employer, likely OPT-OK"; treat `None` at a large co as still-verify.
+- **STILL BLOCKED (HTTP 403, unchanged from ALL prior runs):**
+  - **Individual JD verification — every ATS host 403'd again.** Tested
+    GlobalFoundries `*.myworkdayjobs.com` directly this run → **403**. greenhouse,
+    ashby, oracle, smartrecruiters all unchanged. **I could not read a single JD
+    body**, so seniority (where not in the title) and exact visa/clearance language
+    remain unverified. Every "verify" must be opened manually.
+  - **Community boards — HN still unreadable for per-post links.** HN "Who is
+    hiring (June 2026)" thread is **live** (`news.ycombinator.com/item?id=48357725`).
+    Direct fetch of `hnhiring.com/june-2026` → **403**; the GitHub-pages mirror
+    `nchelluri.github.io/hnjobs/` → **403**. A `WebSearch` *over* hnhiring.com
+    returned prose summaries but **no per-post direct links** (same as 06-20 runs).
+    Findings logged in the Community section honestly as unlinked.
+  - **Reddit / Discord / Slack:** not machine-readable (reddit fetch hard-blocked
+    in prior runs; not re-attempted this run to conserve budget). **Boards still
+    unverified for daily use** — the only confirmed-active, datable board remains
+    the HN monthly thread, and it can only be *searched*, not link-extracted.
+- **Wellfound:** WebSearch surfaced a few real direct job URLs (logged in Tier 3),
+  but recency/seniority unverifiable (Wellfound pages don't expose reliable post
+  dates to search). LinkedIn / Indeed / Glassdoor: aggregator landing pages only,
+  no stable per-post links — nothing logged.
+- **Recency basis:** jobright rows carry calendar dates (Jun 16–23, all in-window).
+  speedyapply/zapplyjobs `Xd` ages read against the tracker's Jun 23 refresh.
+  zapplyjobs ages in **minutes/hours** ("14m","5h") are scraper **first-seen**
+  stamps from this refresh, **NOT** guaranteed post dates — flagged inline as
+  "first-seen recent" rather than given a false calendar date.
+- **De-duped out as already logged** (re-appear in trackers, NOT repeated below):
+  Astera Labs ML NCG (4646633005), Caterpillar Data Eng Cat Digital Irving
+  (R0000377847), CVS Health Data Eng Irving (R0942279), Zoom ML, AbbVie Associate
+  Data Engineer I/II, CrowdStrike Engineer I Agentic AI, Fortinet Applied AI New
+  Grad (23077), Tanium Corporate AI, NewsBreak Applied AI, Cape Data Eng,
+  Elevance Gen AI, Capital One Applied Researcher I, Snowflake AI Research
+  Scientist, NVIDIA LLM Training NCG, True Anomaly ML, Unity ML, Defense Unicorns
+  FDE Data Eng, Westinghouse DS New Grad, ICF Data Eng. (AbbVie "Associate Data
+  Scientist I", North Chicago — same company family as the already-logged AbbVie
+  data-eng reqs; noted in Excluded, not given its own row to avoid padding.)
+
+### Tier 1 — Hot & strong fit
+_Visa buckets inferred (all JDs 403); seniority confirmed only where the title states it. The strongest NEW lead this run is candidate-LOCAL and an explicit new-grad role._
+
+| Company | What they do / size | Role | Direct link | Posted (basis) | Visa posture | Fit note | Source |
+|---|---|---|---|---|---|---|---|
+| GlobalFoundries | Semiconductor foundry (chip mfg); large public (~13k) | AI/ML Systems Engineer — 2026 New College Graduate | https://globalfoundries.wd1.myworkdayjobs.com/en-US/external/job/USA---Texas---Richardson/AI-ML-Systems-Engineer---2026-New-College-Graduate-_JR-2602829 | "1d" (≈Jun 22) | Silent, larger company — **verify** (commercial fab, generally OPT-OK; semis can carry EAR export-control nuances — confirm) | **Richardson, TX = candidate's home city.** Explicit *New College Graduate* + AI/ML title = entry-level + applied-ML fit; gap: systems/ML-for-hardware leans heavier than RAG/LLM-product | speedyapply NEW_GRAD |
+
+### Tier 2 — Worth a look (good fit; caveat = seniority and/or visa unverified, JD 403)
+
+| Company | What they do / size | Role | Direct link | Posted (basis) | Visa posture | Fit note | Source |
+|---|---|---|---|---|---|---|---|
+| Snowflake | Data-cloud platform; large public (non-FAANG, in scope) | Forward Deployed Engineer – Data Engineering | https://jobs.ashbyhq.com/snowflake/9bbafaf2-240d-4cfb-8e95-b289f0350be5/application | "5h" first-seen (recent, in-window) | Silent, larger company — **verify** (zapplyjobs: company sponsors) | **FDE = bullseye target title**; data-eng + customer-facing build; gap: FDE roles often want 1–2 yrs (seniority unverified) | zapplyjobs DS |
+| Snowflake | Data-cloud platform; large public | Forward Deployed Engineer – Finance Analytics | https://jobs.ashbyhq.com/snowflake/9cf335c9-f99d-4ddb-b307-0dcd3a162a09/application | "2d" (≈Jun 21) — `Sponsor` | Silent, larger company — **verify** (zapplyjobs: ✅ Sponsor) | FDE target title + analytics; same seniority caveat as above | zapplyjobs (Data Analyst section) |
+| Reach Financial | Consumer-lending fintech (personal loans/debt); growth-stage | Data Engineer | https://job-boards.greenhouse.io/reach/jobs/8597878002 | "1d" (≈Jun 22) — `✅ Sponsor` | Silent, growth-stage — likely OK (zapplyjobs: ✅ Sponsor) | Remote-US data-eng at an AI-leaning fintech; dbt/Airflow/SQL overlap; gap: seniority unverified | zapplyjobs DS |
+| EquipmentShare | Construction-tech / fleet & telematics SaaS; growth-stage (~unicorn) | Analytics Engineer | https://www.equipmentshare.com/careers/openings/?gh_jid=8003299 | "first-seen recent" (zapplyjobs refresh) | Silent, growth-stage — likely OK (`None`) | **Analytics Engineer = exact target title**; dbt/SQL/BI fit; gap: Columbia MO HQ (remote? verify), seniority unverified | zapplyjobs DS |
+| Experian | Credit-data/analytics; large public | Analytics Engineer | https://jobs.smartrecruiters.com/Experian/744000132714530 | "5d" (≈Jun 18) — `H-1B Co.` | Silent, larger company — **verify** (zapplyjobs: H-1B Co.) | Analytics-Engineer target title, **remote-US**; data-platform/SQL fit; gap: seniority unverified | zapplyjobs DS |
+| Cox Enterprises | Comms/automotive/media conglomerate; large private | Data Engineer I — Entry Level | https://cox.wd1.myworkdayjobs.com/Cox_External_Career_Site_1/job/Atlanta-GA/Data-Engineer-I---11361_R202678512 | "first-seen recent" (zapplyjobs) — `None` | Silent, larger company — **verify** (`None` = no recent H-1B; large co → verify) | **Explicit "Entry Level" Data Engineer I**; clean entry data-eng rung; gap: Atlanta onsite likely, GenAI angle thin | zapplyjobs DS |
+| CVS Health | Health services/pharmacy; large public | Associate Data Engineer | https://cvshealth.wd1.myworkdayjobs.com/CVS_Health_Careers/job/RI---Woonsocket/Associate-Data-Engineer_R0942229 | "2d" (≈Jun 21) — `None` | Silent, larger company — **verify** | **"Associate" = entry rung**; distinct from the already-logged CVS Irving Data Eng; data-eng fit; gap: RI onsite + healthcare domain | zapplyjobs DS |
+| Paramount Global | Media/streaming; large public (non-FAANG) | Machine Learning Engineer, Entry | https://careers.paramount.com/job/New-York-Machine-Learning-Engineer,-Entry-NY-10036/1389620800/?ats=successfactors | "first-seen recent" (zapplyjobs) — `None` | Silent, larger company — **verify** | **Explicit "Entry" ML Engineer**; NY/Burbank; applied-ML fit; gap: large-media policy unread (`None`) | zapplyjobs DS |
+| Harvey | Legal-AI (LLM products for law firms); growth-stage unicorn | Data Scientist, Product | https://jobs.ashbyhq.com/harvey/1321b20d-d6f8-4bdb-b2de-ec33c0948b53/application | "4d" (≈Jun 19) — `Sponsor` | Silent, growth startup — likely OK (zapplyjobs: ✅ Sponsor) | **Hot applied-LLM company** — direct domain fit (LLM products); product-DS role; gap: SF onsite likely + DS-not-eng framing | zapplyjobs DS |
+| Zayo | Fiber/network infrastructure; large private | AI Engineer | https://zayo.wd1.myworkdayjobs.com/Zayo_Careers/job/United-States/AI-Engineer_R0016139 | "4d" (≈Jun 19) — `H-1B Co.` | Silent, larger company — **verify** (zapplyjobs: H-1B Co.) | **AI Engineer target title, remote-US**; gap: seniority unverified (no level in title) | zapplyjobs |
+| Zayo | Fiber/network infrastructure; large private | Data Analytics Engineer | https://zayo.wd1.myworkdayjobs.com/Zayo_Careers/job/CO---Denver/Data-Analytics-Engineer_R0016513 | "4d" (≈Jun 19) — `H-1B Co.` | Silent, larger company — **verify** | Analytics-engineer target title; Denver; gap: seniority unverified | zapplyjobs DS |
+| GumGum | Contextual-AdTech / computer-vision ads; mid-size | Data Scientist I | (jobright row; ATS link not captured this run — Santa Monica CA, posted Jun 21) | Jun 21 (jobright date) | Silent, mid-size — likely OK | **"I" = entry**; CV/ML adtech applied fit; gap: **direct ATS URL not captured** (jobright info link not surfaced in this fetch) — verify before treating as confirmed | jobright DA |
+| Amplitude | Product-analytics SaaS; mid-large public | Customer Data Scientist | https://job-boards.greenhouse.io/amplitude/jobs/8600045002 | "4d" (≈Jun 19) — `H-1B Co.` | Silent, larger company — **verify** | Remote-US, customer-facing DS (FDE/Solutions-adjacent); analytics fit; gap: seniority unverified | zapplyjobs DS |
+| University of Texas at Austin | Public university IT/data; large public-sector | Data Engineer I | https://utaustin.wd1.myworkdayjobs.com/UTstaff/job/AUSTIN-TX/Data-Engineer-I_R_00045134 | "first-seen recent" (zapplyjobs) — `None` | Unclear — **verify** (public university; usually work-auth-OK not citizen-only, but confirm no state-residency clause) | **"I" = entry, Austin TX (in-state, relocatable)**; data-eng fit; gap: public-sector pay/residency rules + GenAI angle thin | zapplyjobs DS |
+| TRC Companies | Engineering/environmental consulting; large | Data Analyst — Entry Level | (jobright row; ATS link not captured this run — Houston TX, posted Jun 23) | Jun 23 (jobright date) | Unclear — **verify** (consulting; some govt-adjacent work may add constraints) | **Explicit "Entry Level" Data Analyst, Houston TX** (in-state); BI/SQL fit; gap: **direct ATS URL not captured** + consulting domain | jobright DA |
+
+### Tier 3 — Long shots / needs verification / seniority or domain risk
+
+| Company | What they do | Role | Direct link | Posted | Visa posture | Why Tier 3 | Source |
+|---|---|---|---|---|---|---|---|
+| ScriptChain Health | Healthcare-AI (predictive patient monitoring); startup | AI Agent Engineer Intern (Summer 2026) | https://wellfound.com/jobs/3542501-ai-agent-engineer-intern-summer-2026 | Date unverified (Wellfound) | Silent, small startup — likely OK | GraphRAG/LLM-agent work + **requires MS (candidate has it)** = strong stack fit, BUT it's a **summer intern** role and candidate graduates May 2026 → timing mismatch; recency unverified | Wellfound (WebSearch) |
+| Glacis | Supply-chain AI startup | Founding Software Engineer – Agentic AI (Remote) | https://wellfound.com/jobs/4053494-founding-software-engineer-agentic-ai-remote | Date unverified (Wellfound) | Silent, small startup — likely OK | Agentic-AI + remote = on-profile, but **"Founding" usually implies senior/experienced**; recency + seniority unverified | Wellfound (WebSearch) |
+| Plaid | Fintech data network; mid-large | ML Engineer – Embedded · ML Engineer (Research) | https://jobs.ashbyhq.com/plaid/50d40e3b-ed34-470d-b094-71e1555c6f1e/application · https://jobs.ashbyhq.com/plaid/95ccc1d4-39ad-467f-8d65-63227d943313/application | "4d" (≈Jun 19) — `Sponsor` | Silent, larger company — **verify** | ML-Eng at a strong fintech (sponsor-friendly), but **no level in title → likely mid, not entry** (seniority unverified) | zapplyjobs |
+| Reddit | Social platform; large public (non-FAANG) | Machine Learning Engineer | https://job-boards.greenhouse.io/reddit/jobs/8014401 · https://job-boards.greenhouse.io/reddit/jobs/8014436 | "1d" (≈Jun 22) — `Sponsor` | Silent, larger company — **verify** | ML-Eng, sponsor-friendly, but seniority unverified (Reddit ML roles typically not new-grad) | zapplyjobs |
+| Motional | Autonomous-vehicle tech; growth-stage | ML Engineer, Data Mining | https://motional.com/open-positions/?gh_jid=7780008003#/7780008003 | "1d" (≈Jun 22) — `Sponsor` | Silent, growth-stage — likely OK | ML-Eng + sponsor, but AV data-mining focus + seniority unverified | jobright/zapplyjobs |
+| Bread Financial | Consumer-credit fintech; large public | Data Scientist | https://alliancedata.wd5.myworkdayjobs.com/breadfinancial_us/job/Columbus-OH/Data-Scientist_R1012772 | "2h" first-seen — `None` | Silent, larger company — **verify** | DS at a fintech; analytics fit, but seniority unverified (no level) + recency is a scraper stamp | zapplyjobs |
+| FanDuel | Sports betting / iGaming; large | Data Scientist | (jobright row — Jersey City NJ, Jun 22; ATS link not captured) | Jun 22 (jobright) | Silent, larger company — **verify** (regulated gaming → possible licensure/background step) | DS fit, but seniority unverified + gaming-license step likely + link not captured | jobright DA |
+| UnitedHealthcare (UnitedHealth Group) | Health insurer; very large public | Data Analyst I | (jobright row — Minnetonka MN, Jun 23; ATS link not captured) | Jun 23 (jobright) | Silent, larger company — **verify** | "I" = entry DA fit, but very large healthcare payer (real immigration policy) + link not captured | jobright DA |
+| Procter & Gamble | CPG; very large public | Data Scientist | (jobright row — Cincinnati OH, Jun 19; ATS link not captured) | Jun 19 (jobright) | Silent, larger company — **verify** | DS fit, but seniority unverified + huge-CPG policy + link not captured | jobright DA |
+| Cincinnati Children's | Pediatric hospital/research; large nonprofit | Business Intelligence Analyst | (jobright row — Jun 18; ATS link not captured) | Jun 18 (jobright) | Unclear — **verify** | BI-Analyst target title, but healthcare + link not captured | jobright DA |
+
+### Community / informal leads (HN "Who is hiring (June 2026)", thread id 48357725)
+_Surfaced ONLY via `WebSearch` over hnhiring.com / nchelluri mirror — **both 403 to direct fetch**, so **no per-post HN permalinks were obtainable**. Logged honestly as unlinked; do NOT treat as confirmed without finding the original comment. The HN monthly thread remains the only confirmed-active, datable community board, and it is search-only this cycle._
+- **Stealth team (property-management space)** — *Forward Deployed Engineer* (backend, Python), **fully remote (UTC −3 to +3, so US-overlap OK)**, "competitive comp, funded/profitable." Owns a client-facing use case end-to-end (FDE = target title). **Apply: email `mercedes@kinxshn.com`** with subject "HN - Forward Deployed Engineer" + CV + salary expectations. No company name / no stable link.
+- **Unnamed company** — *Data Engineer* for "enterprise-scale pipelines" at a firm running "one of the world's fastest private supercomputers" (customers incl. NVIDIA, Delta, Mars). No name/link captured.
+- **EggAI** — AI Engineer / Platform roles, **remote EU/Switzerland/Norway** → **out of geography** for F-1 OPT (US-only). Noted to avoid re-surfacing.
+- **Fathom** — Full-Stack + AI team; AI team **SF hybrid**, eng team remote. Plausible applied-AI fit; no direct link captured. Worth a manual look on the HN thread.
+
+### Excluded (logged so future runs don't re-surface)
+- **FAANG-tier (referral track):** Google (Data Engineer; Research Scientist ×2), Meta (Data Engineer Univ Grad; Research Scientist Interns), Amazon/AWS (Applied Scientist; Data Science I SCOT; Data Engineer AFT BI / Platform Mgmt / PV Prime Video; DS Finance AI), Microsoft (Data Engineer II ×2; Applied Science Internships; Snr Applied Scientist), Apple/Netflix (none new this run). Snap (ML Eng L4/L5 — large + senior), Adobe (Applied Scientist / ML Eng / Data Science Eng — all experienced), Disney (Data Engineer II), Intel/Applied Materials/Intuitive (experienced ML/research).
+- **Defense / federal / clearance (US-person near-certain):** Booz Allen Hamilton (AI/ML Eng Mid+McLean+Dayton, Applied DS, DS Junior Springfield, Data Engineer ×, BI & Logistics, Statistician), GDIT (Data Engineer Falls Church, DS-Junior Jacksonville), Guidehouse (Data Engineer, DS Houston, Bioinformatics), KBR (Data Engineer DC, TAGM DE Redstone), Leidos (DS SME AI/ML Fort Meade, Research Sci Meteorological, SWE+DS Bay St Louis, CMDB DE Tampa), CACI (DS Clearance Chantilly, DS Security Linthicum), ICF (Data Engineer Reston), Anduril (Data Analyst Air Dominance, Data Engineer Quality Intel — sponsor but ITAR/defense), Defense Unicorns (FDE DE Space — already logged), Radiance (DS Dahlgren), RTX (Research Sci AI/ML), Boeing (Data Analyst Long Beach, Expert DS Renton).
+- **Senior/manager/principal/research-PhD:** Capital One (Manager DS ×3), Mastercard (DS SF, Manager Data Eng), Comcast (Data Eng 2/3 Freewheel), Transamerica (Manager BI), Two Sigma (Quant Researcher), PIMCO (Quant Research Analyst — research desk), OpenAI (Research Eng/Scientist — research-bar), ByteDance (Research Scientists), Qualtrics (Applied Scientist II), Expedia (ML Scientist III), Salesforce (Data Eng SMTS/LMTS — senior MTS levels).
+- **Wet-lab / clinical / non-data research (not applied-AI/data-eng fit):** Vertex Pharma (×3 Research Scientists), Thermo Fisher (Associate/FSP Research Scientists ×3), Elanco (×2), Sanofi (Clinical DS), Philips (Research Sci CT), Boston Dynamics (Research Sci RL/VLA — robotics-research), GenBio AI (Research Sci Applied Science — bio-research), Zoetis, Johnson & Johnson (Comm Ops DE — could fit but med-device; deprioritized).
+- **Intern/co-op only (candidate graduates May 2026 → weak timing) or non-US:** Tesla (Data/ML/Analyst Interns ×several), TikTok (DE/DS/ML Interns), ByteDance interns, ABB (AI/DS Intern Fall 2026), Ryan (Summer 2026 Intern Plano TX — note Ryan/Plano is DFW-local if an FTE opens), Nokia (DS Co-ops), Campbell Soup (DE Co-ops ×3 incl. Agentic AI — co-op), Eurofins (BI Intern), JM Family / Marmon / Sunwater / PlusAI / Doctors Without Borders / Centerfield (interns), TD Bank (Fall Co-op), RBC/Manulife/PepsiCo Canada/Sureserve UK (non-US geography).
+- **Already-covered company family (not re-rowed to avoid padding):** AbbVie "Associate Data Scientist I" (North Chicago) — AbbVie data-eng reqs already logged 06-20 backfill.
+
+### Bonus — adjacent titles / observations worth carrying forward
+- **"Forward Deployed Engineer – Data Engineering / Finance Analytics" (Snowflake)** — confirms commercial (non-defense) FDE roles exist at a major data-cloud vendor; pair "Forward Deployed" + "Data Engineering" as a high-signal combined search term.
+- **"Analytics Engineer" appears at non-tech enterprises** (Experian, Zayo "Data Analytics Engineer", EquipmentShare, GM "Data Analytics Engineer") — reinforce as a first-class target term (dbt/SQL profile match).
+- **Explicit entry markers seen this run:** "2026 New College Graduate" (GlobalFoundries), "Entry Level" (Cox Data Engineer I, TRC Data Analyst), "Entry" (Paramount ML Engineer), "Associate" (CVS), "I" (Cox/UT Austin/GumGum/UnitedHealthcare). These literal tokens are the most reliable entry-level filter when JDs are unreadable.
+- **GlobalFoundries (Richardson TX) + Ryan (Plano TX) + UT Austin + TRC (Houston) + Caterpillar/CVS (Irving)** — a healthy cluster of Texas-local roles this cycle; prioritize for the candidate's Richardson base.
+
+### TODO for next (daily) run
+- **JD/visa verification is STILL the #1 unsolved blocker** — every ATS host (workday/greenhouse/ashby/oracle/smartrecruiters) 403s. **Mitigant found this run:** zapplyjobs' new sponsor column gives a company-level visa signal; lean on it until a JD-readable path exists.
+- **Community boards:** HN thread `48357725` is live but every machine path (hnhiring.com, nchelluri mirror, Algolia, reddit) 403s; only WebSearch-over-domain works and yields no permalinks. Finding ONE readable HN path remains the key unlock for informal/founder leads.
+- **jobright Data-Analysis** is now permanently capped at "last 7 days" — for 30-day depth a future backfill needs its full Airtable/listings export.
+- A few jobright rows (GumGum, TRC, FanDuel, UnitedHealthcare, P&G, Cincinnati Children's) were summarized **without their `jobright.ai/jobs/info/...` permalinks** in this fetch — re-pull jobright with an explicit "include every info URL" prompt next time so these get stable links.
+
+---
