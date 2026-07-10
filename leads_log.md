@@ -1875,3 +1875,189 @@ All tiered jobright rows carry calendar post dates (Jul 07 – Jul 08). speedyap
   buckets inferred; zapply's H-1B/Sponsor column is the only per-company signal.
 
 ---
+
+## Run: 2026-07-10 17:20 (DEEP BACKFILL — 30 day window)
+
+**THIS IS A ONE-TIME DEEP BACKFILL, NOT A DAILY PASS.** Run 2026-07-10, 30-day
+window (~Jun 10 – Jul 10). Future daily runs should keep using 24h and treat
+everything below as already-seen. Read `leads_log.md` in FULL first and de-duped
+against ALL thirteen prior runs — **including the 07-03 → 07-08 backfills, which
+used this same 30-day window and the same sources within days of this one.** This
+is the 8th same-window pass in ~7 days, so the large majority of what the trackers
+surfaced was already logged; **only genuinely net-new leads (not in any prior run,
+by URL, jobright-id, AND company+role) appear below.** Dedup was done
+programmatically (extracted all 390 prior URLs + 155 jobright IDs from the full
+log, filtered every candidate against them) AND by per-company grep for the
+shortlist to catch same-role reposts under new jobright IDs.
+
+**Coverage summary (fully / partially / not at all):**
+- **FULLY COVERED (curl'd raw markdown from `raw.githubusercontent.com`, all HTTP
+  200, parsed locally with Python — the proven method; NOT WebFetch):**
+  - `zapplyjobs/New-Grad-Data-Science-Positions` (`main`, 88 KB) — read in full;
+    richest source again. Carries a Visa column (`🏛 H-1B Co.` / `✅ Sponsor` /
+    blank) = **company-level** sponsorship signal (generally OPT-friendly), NOT a
+    per-JD guarantee. 57 target-title/non-senior/in-window rows after parse; ~11
+    net-new after non-defense + non-FAANG + non-Canada/UK + dedup.
+  - `jobright-ai/2026-Engineering-New-Grad` (`master`, 1.41 MB) — read in full;
+    calendar-dated. In-window target rows span **Jul 04 – Jul 10**. 38 net-new-by-URL
+    parsed; ~8 tiered after manual seniority/geo/gov/same-role-repost review.
+  - `jobright-ai/2026-Data-Analysis-New-Grad` (`master`, 79 KB) — read in full,
+    still **caps at "last ~7 days" (Jul 03 – Jul 10)** per its capacity constraint;
+    30-day depth unavailable (same cap every prior run). 65 net-new-by-URL; ~10
+    tiered after review.
+  - `jobright-ai/2026-Business-Analyst-New-Grad` (`master`, 20 KB) — read in full;
+    **0** net-new in-window target rows after dedup (thin, as every prior run).
+  - `speedyapply/2026-AI-College-Jobs` → `NEW_GRAD_USA.md` (`main`, 88 KB) — read
+    in full. **Effectively dead for net-new this run:** only 1 target row survived
+    parse+dedup (Figma DS – PhD, 77d = OUT of window). Age window rolled to
+    20–110d-dominated; the explicit-"I" rows it surfaced 07-08 are now all logged.
+    Contrast 07-08 (5 net-new) — the window rolls, so keep spot-checking, don't
+    demote permanently.
+- **PARTIALLY COVERED (WebSearch works; underlying JD pages 403 → bodies /
+  seniority / exact post date / visa language UNVERIFIED):**
+  - **YC Work-at-a-Startup** — ran BOTH `site:ycombinator.com/companies …
+    "Forward Deployed Engineer"` and `… "Applied AI Engineer"` (the one reliable
+    community channel). **ZERO net-new non-founding roles this run** — every
+    commercial FDE returned (FurtherAI, Aravolta, Cedana, Cekura, Luminai, Trellis
+    AI, Mercura, HappyRobot) and every Applied-AI (Maywood, Model ML, PermitFlow,
+    Firstbase, Delve, Artisan) was already logged; the only two new names —
+    **Arist** (Founding FDE) and **Flair Labs** (Founding Applied AI Eng) — are both
+    *Founding* roles → excluded per standing convention. YC is now fully-mined at
+    the same-window cadence; expect it to keep returning 0 until the daily cadence
+    resumes and the listing set turns over.
+- **NOT COVERED / BLOCKED (unchanged structural blockers, re-confirmed this run):**
+  - **Individual JD verification — ALL still blocked.** `curl` + `WebFetch` to
+    greenhouse / ashby / workday / oracle / smartrecruiters / lever / jobright =
+    egress-denied / 403 (every prior run). **No JD body read** → EVERY visa bucket
+    below is inferred from company type + role (+ zapply's H-1B column where
+    present), NOT JD text. Every "verify" must be opened manually. Seniority for any
+    role not explicitly labeled entry/junior/associate/"I"/"1"/new-grad/early-career
+    is **unverified** and flagged inline.
+  - **HN "Ask HN: Who is hiring?" thread** — re-tested this run: `hn.algolia.com/
+    api/v1/search` = **HTTP 000** (egress-denied). Same blocker as every prior run.
+    Nothing from HN. Remains the #1 un-mined community gap.
+  - **Reddit / Discord / Slack** — re-tested `reddit.com/r/forhire/new.json` =
+    **HTTP 000** (egress-denied). Not machine-readable, hard-blocked every prior run.
+    No active datable "who's hiring" thread surfaced with per-post links.
+  - **LinkedIn / Indeed / Glassdoor / Wellfound / Built In** — only aggregator
+    landing pages, no per-posting dates or stable direct links → nothing logged. No
+    founder/recruiter post with a stable direct link surfaced this run.
+- **Recency basis:** jobright rows = calendar dates (Jul 04 – Jul 10, used
+  directly, all in-window). zapply minute/hour/day stamps ("27m","17h","1d","3d")
+  are scraper FIRST-SEEN, not confirmed post dates, but all comfortably inside a
+  30-day window (flagged inline). No YC community rows this run. No separate
+  "Recency unverified" tier needed — every tiered lead is datable within the window.
+- **De-duped OUT as already logged / same-role repost under a new jobright id**
+  (surfaced again this run, NOT repeated below): **CyberProof – Associate Data
+  Engineer (Early Career)** (logged 06-22, new id 6a44a21b = same req), **Applied
+  Materials – MLE (Generative AI)** (logged 06-23, new id 6a3dddce = same req),
+  **UST – Associate Data Engineer, Frisco TX** (logged 07-08, new id 6a4494d5 =
+  same req), **Astrana Health – Forward Deployed Engineer** (logged 07-08, new id
+  6a4d9d12 = same req), plus UST HealthProof (Assoc DE), Capgemini (Jr DE ×3 +
+  ETL-Migration variants), NewsBreak (Applied AI Eng), Tata (Jr DE Plano), Somatus
+  (MLE — a 2nd id kept below is the same req; noted), AST (BI Analyst ×2), Core
+  Specialty (Actuarial DA), Quantifind (Assoc DS ×2), Rivian (Durability DA Eng),
+  BD (Commercial Analytics Eng), HPE (DS Spring TX), PTC (Jr DA/Analytics Eng),
+  Liberty University (Business DA I), Corning (QA DA), Ensign College, Beth Israel
+  Lahey, Cornell, Gravie (DA ×2), Gen Digital (MLE I — logged 07-08).
+
+### Tier 1 — Hot & strong fit (net-new)
+_Explicit entry marker (new-grad/junior/founding-studio) + on-target title + in-window + commercial (non-defense, non-FAANG) + strong applied-AI fit. Visa inferred (JDs all 403/000)._
+
+| Company | What they do / size | Role | Direct link | Posted (basis) | Visa posture | Fit note | Source |
+|---|---|---|---|---|---|---|---|
+| Quora | Q&A platform + **Poe** (multi-LLM consumer app); mid-large private (non-FAANG) | Machine Learning Engineer, New Grad (Remote) | https://jobright.ai/jobs/info/6a4f0064fc327f422fef4b01 | Jul 08 (jobright) | Silent, mid-large — likely OK (remote-first, hires broadly) | **Explicit "New Grad" + MLE + Remote-US**; Poe is a direct LLM/GenAI product → strongest applied-AI fit this run for the candidate's RAG/LLM profile; gap: recsys/ranking may dominate vs RAG, large-ish co policy unread | jobright ENG |
+| Vagaro | SaaS booking/business-management platform for salons, spas & fitness; mid-size private | Jr. AI Engineer | https://jobright.ai/jobs/info/6a45bf2bc2d11a6a4666a001 | Jul 09 (jobright) | Silent, mid-size — likely OK | **Explicit "Jr." + "AI Engineer" target title** at a product SaaS co (not a consultancy); Pleasanton CA; applied-AI/LLM-feature build fit; gap: onsite CA, SMB-SaaS domain vs fintech-RAG | jobright ENG |
+| AI Fund | Andrew Ng's AI venture studio (builds + staffs AI startups); growth-stage | Forward Deployed AI Engineer | https://jobs.lever.co/AIFund/d4223787-d070-439b-9a30-bad1a9856ef4/apply | zapply 1d first-seen (in-window; scraper stamp) | Silent, growth studio — likely OK | **FDE + AI Engineer target title** at an AI-builder studio; Mountain View; ship-end-to-end deploy profile match; **NOTE: AI Fund's "Applied AI Engineer" + "AI Engineer" roles were logged prior — this FDE-AI role is a distinct URL/title, net-new**; gap: seniority unverified (JD 403) | zapplyjobs |
+
+### Tier 2 — Worth a look (net-new; caveat = seniority and/or visa unverified, JD 403/000)
+
+| Company | What they do / size | Role | Direct link | Posted (basis) | Visa posture | Fit note | Source |
+|---|---|---|---|---|---|---|---|
+| Rakuten International | E-commerce / fintech / digital-content conglomerate (US arm); large | Early Career AI Engineer (Contract) | https://jobright.ai/jobs/info/6a4ea9621544d7246c0d3b71 | Jul 08 (jobright) | Silent, larger company — **verify** | **"Early Career" + "AI Engineer" + Contract (in-scope per brief)**; Bellevue WA / San Mateo CA (2 reqs); applied-AI fit; gap: contract-not-FTE, large-co policy unread | jobright ENG |
+| AcuityMD | Commercial-intelligence SaaS for medical-device teams; growth-stage private | Data Analyst, Software Engineering Track (Boston or Remote) | https://job-boards.greenhouse.io/acuitymd/jobs/6111981004 | zapply 1d first-seen | ✅ Sponsor (zapply) → likely OPT-OK, **verify** | **"Software Engineering Track" DA + Remote option at a co that sponsors**; SQL/analytics + eng crossover fits the ship-real-systems profile; gap: med-device-commercial domain, seniority unverified | zapplyjobs |
+| NBCUniversal | Media / streaming conglomerate; large public (non-FAANG) | Jr. Data Scientist, Business Analytics | https://jobs.smartrecruiters.com/NBCUniversal3/744000136567229 | zapply 1d first-seen | Silent, larger company — **verify** | **Explicit "Jr." DS**; Universal City CA; SQL/BI/analytics fit; **NOTE: NBCUniversal "Analytics Engineer" logged prior — this Jr. DS is a distinct role**; gap: large-media policy unread, business-analytics not applied-AI-eng | zapplyjobs |
+| Janus Henderson Investors | Global asset-management firm; large public (non-FAANG, non-trading-floor) | Junior Data Engineer | https://jobright.ai/jobs/info/6a4f975c9469c0662034e31d | Jul 09 (jobright) | Silent, larger company — **verify** | **Explicit "Junior" DE**; Denver CO; dbt/SQL/Airflow fit; gap: asset-mgmt-finance domain, large-co immigration policy unread | jobright ENG |
+| Generate:Biomedicines | Generative-AI drug-discovery / protein-design biotech; growth-stage | Data Scientist I | https://jobright.ai/jobs/info/6a4fe35b397d8d353c28d003 | Jul 09 (jobright) | Silent, growth-stage — likely OK | **Explicit "I" entry DS at a generative-AI-first biotech** (ML-heavy, applied); Somerville MA; Python/ML fit; gap: comp-bio domain (may want bio background), onsite | jobright DA |
+| Trinity Health | Large Catholic non-profit health system; very large (cap-exempt) | Associate Data Scientist | https://jobright.ai/jobs/info/6a4eb19ffc327f422fef3d17 | Jul 08 (jobright) | Likely OPT-friendly (non-profit health system, H-1B cap-exempt), **verify** | **Explicit "Associate" DS at a cap-exempt employer** (lower visa risk); Clive IA; Python/SQL/ML fit; gap: healthcare-analytics domain, Iowa location | jobright DA |
+| Gartner | Research / advisory (tech + business insight); large public (non-FAANG) | Business Intelligence Analyst | https://jobright.ai/jobs/info/6a4f1e4615b4965afd585679 | Jul 08 (jobright) | Silent, larger company — **verify** | **BI-Analyst target title** at a strong-brand advisory co; Stamford CT; SQL/BI/reporting fit; gap: no entry marker → seniority unverified, large-co policy | jobright DA |
+| JPMorgan Chase | Global bank / financial-services; very large (non-FAANG) | Data Scientist Associate | https://jpmc.fa.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/job/210768686 | zapply 17h first-seen | 🏛 H-1B Co. (zapply) → likely OPT-OK, **verify** | **"Associate" entry DS + Plano, TX = in-state (DFW-metro)**; Python/SQL/ML fit at a large sponsor; gap: big-bank immigration/role-scope policy, corporate-DS niche | zapplyjobs |
+| FIS | Financial-technology / payments-software firm; large public (non-FAANG) | Analyst I, Business Intelligence | https://fis.wd5.myworkdayjobs.com/SearchJobs/job/US-WI-MKE-4900/Analyst-I--Business-Intelligence_JR0307857 | zapply 1d first-seen | Silent, larger company — **verify** | **Explicit "I" entry + BI target title**; Milwaukee WI; SQL/BI fit; gap: fintech-BI niche, large-co policy unread | zapplyjobs |
+| Caterpillar | Heavy-equipment / industrial manufacturer; very large public (non-FAANG) | Associate Business Intelligence Analyst | https://cat.wd5.myworkdayjobs.com/caterpillarcareers/job/Nashville-Tennessee/Associate-Business-Intelligence-Analyst_R0000381807 | zapply 1d first-seen | Silent, larger company — **verify** | **Explicit "Associate" + BI-Analyst target**; Nashville TN; SQL/BI fit; **NOTE: prior Caterpillar rows were senior (Mgr IV) — this Associate role is a distinct entry rung**; gap: industrial-manufacturing domain, large-co policy | zapplyjobs |
+| Saratoga County Chamber of Commerce / Hudson River Community CU | Regional NY employer(s) — analytics for a chamber-of-commerce / credit-union; small–mid | Analytics Engineer I | https://jobright.ai/jobs/info/6a50eec08d7d3e6cf1cbd81b | Jul 10 (jobright) | Silent, small–mid — likely OK | **Explicit "I" entry + Analytics-Engineer target**; Corinth NY (two near-identical reqs — chamber + HRCCU — likely one shared posting); dbt/SQL fit; gap: small-org/regional scope, onsite upstate NY, far from applied-AI | jobright ENG |
+| Red Ventures | Digital-marketing / online-brand portfolio company; large private | Associate Data Scientist (Home Client) | https://www.redventures.com/careers/positions/open | zapply 1d first-seen | ✅ Sponsor (zapply) → likely OPT-OK, **verify** | **Explicit "Associate" DS at a co that sponsors**; Charlotte NC; Python/SQL/ML fit; **LINK CAVEAT: zapply only exposed the generic openings page, not a stable per-req URL — search "Associate Data Scientist" on that page to find the exact req**; gap: marketing-analytics domain | zapplyjobs |
+
+### Tier 3 — Long shots / needs verification / seniority or domain risk (net-new)
+
+| Company | What they do | Role | Direct link | Posted | Visa posture | Why Tier 3 | Source |
+|---|---|---|---|---|---|---|---|
+| Databricks | Data + AI lakehouse platform; very large private (non-FAANG) | Applied AI Engineer, Learning Intelligence | https://www.databricks.com/company/careers/open-positions | zapply 1d first-seen | ✅ Sponsor (zapply) → likely OPT-OK, **verify** | Applied-AI target title at a data+AI leader (strong domain fit) BUT **LINK CAVEAT: zapply only exposed the generic careers landing page, no stable per-req URL** — search the title there; seniority unverified, Databricks bar is high | zapplyjobs |
+| ServiceNow | Enterprise workflow / IT-service-management SaaS; very large public (non-FAANG) | Machine Learning Engineer, Agentic Systems | https://jobs.smartrecruiters.com/ServiceNow/744000136346369 | zapply 2d first-seen | 🏛 H-1B Co. (zapply) → likely OPT-OK, **verify** | **"Agentic Systems" MLE = direct fit to the candidate's LangGraph/agent work**; Mountain View CA; gap: no entry marker → seniority unverified, very-large-co bar/policy | zapplyjobs |
+| Zoom | Video-communications / collaboration platform; large public (non-FAANG) | Video AI Engineer | https://zoom.wd5.myworkdayjobs.com/zoom/job/San-Jose-CA/Video-AI-Engineer_R19356-1 | zapply 1h first-seen | Silent, larger company — **verify** | AI-Engineer target title; San Jose CA; applied-AI/ML fit; gap: no entry marker → seniority unverified, video/CV-leaning vs RAG/LLM, large-co policy | zapplyjobs |
+| Somatus | Value-based kidney-care health-tech; growth-stage | Machine Learning Engineer | https://jobright.ai/jobs/info/6a4e9fe30ea38951a6ff3ec0 | Jul 08 (jobright) | Silent, growth-stage — likely OK | MLE target title at a health-tech co; McLean VA; applied-ML fit; gap: no entry marker → seniority unverified, healthcare domain (a 2nd jobright id for the same req was de-duped) | jobright ENG |
+| KLA | Semiconductor process-control / metrology equipment; large public | AI Engineer (Computer Vision / Signal Processing) | https://kla.wd1.myworkdayjobs.com/Search/job/Milpitas-CA/AI-Engineer--Computer-Vision-Signal-Processing_2638582 | zapply 3d first-seen | Silent, larger company — **verify** | AI-Engineer target title; Milpitas CA; ML fit BUT **CV/signal-processing-heavy → far from RAG/LLM**; seniority unverified, semis domain | zapplyjobs |
+| D. E. Shaw | Quantitative investment-management firm; large private | Applied AI Engineer | https://www.deshaw.com/careers/applied-ai-engineer-5375 | zapply 7m first-seen | Silent, larger — **verify** | Applied-AI target title + real direct link; NYC; **CAVEAT: quant hedge fund → trading-floor-adjacent (profile prefers non-trading-floor) + extremely selective bar**; seniority unverified | zapplyjobs |
+| Kikoff | Consumer credit-building fintech app; growth-stage private | Data Scientist, Operations | https://jobright.ai/jobs/info/6a5101ea57513b72e0c62fcf | Jul 10 (jobright) | Silent, growth-stage — likely OK | DS target at a consumer-fintech; San Francisco CA; Python/SQL/analytics fit; gap: no entry marker → seniority unverified, ops-analytics niche | jobright DA |
+| Paramount | Media / streaming conglomerate; large public (non-FAANG) | Associate Data Scientist | https://jobright.ai/jobs/info/6a4d663f35e45603c4bb3cb8 | Jul 07 (jobright) | Silent, larger company — **verify** | **Explicit "Associate" DS**; Burbank CA; Python/SQL/ML fit; gap: large-media policy unread, media-analytics niche | jobright DA |
+| CareFirst BlueCross BlueShield | Regional non-profit health insurer; large | Associate Data Analyst (Hybrid) | https://jobright.ai/jobs/info/6a4e4d259469c0662034ac35 | Jul 08 (jobright) | Silent, non-profit health — likely OK, **verify** | **Explicit "Associate" DA**; Baltimore MD (hybrid); SQL/BI fit; gap: health-insurance-analytics niche, seniority-verify | jobright DA |
+| Brown University Health | Academic hospital / health system; large (cap-exempt) | Data Analyst | https://jobright.ai/jobs/info/6a500cbe9469c0662034fffb | Jul 09 (jobright) | Likely OPT-friendly (hospital, cap-exempt), **verify** | DA target at a cap-exempt employer (lower visa risk); Providence RI; SQL/BI fit; gap: no entry marker → seniority unverified, healthcare domain, onsite | jobright DA |
+| McGraw Hill | Educational-content / ed-tech publisher; large private | Data Scientist | https://jobright.ai/jobs/info/6a503afc397d8d353c28e4ed | Jul 09 (jobright) | Silent, larger company — **verify** | DS target + **Remote-US**; Python/SQL/ML fit; gap: no entry marker → seniority unverified, ed-tech-analytics niche | jobright DA |
+| Rocket Companies | Mortgage / fintech (Quicken Loans parent); large public | Data Analyst | https://quickenloans.wd5.myworkdayjobs.com/rocket_careers/job/Detroit-MI/Data-Analyst_R-083450-1 | zapply 1d first-seen | Silent, larger company — **verify** | DA target; Detroit MI; SQL/BI fit; gap: no entry marker → seniority unverified, mortgage-fintech niche | zapplyjobs |
+| Capgemini | IT-services / digital-consulting firm; very large | Junior Power BI Developer | https://jobright.ai/jobs/info/6a4e80c41544d7246c0d314b | Jul 08 (jobright) | Silent, larger company — **verify** | **Explicit "Junior" + Power-BI/BI-Developer target + Irving, TX = in-state (DFW-metro)**; SQL/BI fit; gap: **IT-services consultancy → client-bench/staffing-scope risk** (verify it's a real product-team hire), Capgemini heavily logged prior for DE roles | jobright DA |
+| PhysicsX | AI/ML for engineering-simulation & physics; growth-stage | Data Scientist | https://jobright.ai/jobs/info/6a3e6a884d047136e0936162 | Jul 07 (jobright) | Silent, growth-stage — likely OK | DS at an applied-ML/simulation co; San Francisco CA; Python/ML fit; gap: no entry marker → seniority unverified, physics/eng-simulation domain (may want domain background) | jobright DA |
+| Genpact | Professional-services / digital-ops & consulting; very large | AI Engineer "4A" | https://jobright.ai/jobs/info/6a4e3fcd9469c0662034aa72 | Jul 08 (jobright) | Silent, larger company — **verify** | AI-Engineer target title; NYC; applied-AI fit BUT **"4A" internal level is ambiguous + services firm → client-account/bench-scope risk**; verify role is a real product hire | jobright ENG |
+| Erewhon | Upscale grocery / retail chain; mid-large private | Junior Data Engineer | https://jobright.ai/jobs/info/6a4ee633397d8d353c28aaaa | Jul 08 (jobright) | Silent, mid-large — likely OK | **Explicit "Junior" DE**; Los Angeles CA; dbt/SQL fit; gap: grocery-retail-analytics niche (far from applied-AI), onsite | jobright ENG |
+| Alta Resource Technologies | Small tech/services vendor; small | Junior Data Engineer | https://jobright.ai/jobs/info/6a4e21d89469c0662034a732 | Jul 08 (jobright) | Silent, small — likely OK | **Explicit "Junior" DE**; Boulder CO; dbt/SQL fit; gap: small/opaque vendor → verify legitimacy & scope before effort | jobright ENG |
+| CRISP DC | Regional health-information-exchange (Maryland/DC HIE); mid-size non-profit | Data Engineer, Associate | https://jobright.ai/jobs/info/6a5097ba5165966a1161946c | Jul 09 (jobright) | Silent, non-profit — likely OK, **verify** | **Explicit "Associate" DE**; Columbia MD; dbt/SQL/ETL fit; gap: health-data-exchange domain (sensitive PHI — verify no US-person/residency clause), regional scope | jobright ENG |
+
+### Community / informal leads (YC Work-at-a-Startup)
+_**Zero net-new non-founding roles this run** (see Coverage summary). Every commercial FDE + Applied-AI role returned by the two YC queries was already logged in a prior run; the only two new names — **Arist** (Founding FDE) and **Flair Labs** (Founding Applied AI Engineer) — are both* Founding *roles → excluded per standing seniority convention. No founder/recruiter LinkedIn or forum post with a stable direct link surfaced (LinkedIn/Reddit/Discord/HN all hard-blocked, re-confirmed). Nothing loggable from community channels this run._
+
+### Intern / Co-op & part-time (in-scope per brief, but timing-flagged for a May-2026 grad → OPT starts Jul 13 2026)
+_Listed for completeness, not recommended over FTE — a Fall-2026 intern/co-op consumes OPT time on a non-FTE rung. Net-new only._
+| Company | Role | Direct link | Posted | Visa | Note |
+|---|---|---|---|---|---|
+| Great Question | AI Engineer Intern | https://jobs.ashbyhq.com/greatquestion/c533196c-75d5-43b8-b1c8-dedf2437d544/application | zapply 1mo first-seen | (blank) | UX-research SaaS; San Francisco; **AI-Engineer target but intern rung**, month-old |
+| ITT Inc. | Supply Chain Data Analyst Co-op (Fall 2026) | https://jobright.ai/jobs/info/6a4e8dde0ea38951a6ff3998 | Jul 08 (jobright) | Silent | Seneca Falls NY; DA co-op + supply-chain niche, Fall-2026 timing off for a May-2026 grad |
+
+### Recency note
+All tiered jobright rows carry calendar post dates (Jul 07 – Jul 10), all inside the 30-day window (~Jun 10 – Jul 10). zapply rows carry minute/hour/day first-seen stamps (7m–3d → all inside window; first-seen ≠ confirmed post date, flagged inline). speedyapply surfaced only one target row (Figma DS – PhD, 77d = OUT of window, dropped). No YC community rows this run. No separate "Recency unverified" tier needed.
+
+### Excluded (net-new sightings this run, logged so future runs don't re-surface)
+- **Non-US geography (F-1 OPT is US-only):** Applied Systems Canada / Inclusively / Applied Systems (Associate AI Engineer — Toronto ON ×3), Flight Centre Travel Group Canada (Junior DE — Toronto), OLG (Data Scientist Student — Toronto), Publicis Sapient (Junior DA — Toronto), FCC Construcción (DA Co-op — Toronto), Ericsson (BI co-op — Ottawa), Lyft (Data Analyst — Toronto), mthree (Junior DS — Canada), Connor Clark & Lunn (DS Investment Data — Vancouver), Bending Spoons (Graduate DS — London/UK ×2), Urban Jungle Insurance (DS — London), Baltic Apprenticeships (DA Apprentice — UK).
+- **Defense / federal / clearance / gov / gov-services (US-person likely):** AMERICAN SYSTEMS (DE Junior — Quantico VA), General Dynamics Information Technology (Human Performance DS I — Hurlburt Field ×2), Clarity Innovations (DE — Hurlburt Field), Constellis (DA — Philadelphia, security-services), Mission Technologies / HII (BI Developer/Analyst — Fairfax VA, defense), Morgan Business Consulting (Junior DS — Arlington VA, gov consulting), Lentech (Junior DS — Fort Meade MD, prior), Aerospace Corporation (2026 DS — Colorado Springs, space/gov ×2), Sierra Nevada Corporation (AI Engineer III / AI-ML Engineer III — Lone Tree CO, defense; also senior), DCCA (MLE/Specialist — Littleton CO, gov IT), Boeing (BI Analyst — Tukwila WA, aerospace/defense-adjacent), Tocaro Blue (DA — Pensacola FL, maritime-domain-awareness, prior), RTX (Factory Data Analytics Engineer — Tucson/Andover, defense prime ×2), ICF (DE Remote / DE Databricks Reston — gov consulting, prior).
+- **FAANG-tier / near-FAANG / trading-floor (referral or out-of-scope):** Twitch (Data Scientist ×3 — Amazon-owned), AMD (Forward Deployed AI Research Scientist, Applied AI Eng, AI Eng Recursive-Self-Improvement, FDE AI Eng ×several — large + mostly research/senior), Adobe (Applied Scientist — San Jose, prior/senior), Cisco (MLE — Seattle), Jump Trading (Campus DE Intern — trading firm), The Voleon Group (DS — quant fund), Vanguard (DS Specialist — mid), Honeywell (Advanced DS — senior-leaning), Emerson / Jabil / Thomson Reuters (DS — large, no entry marker, seniority-unverified & deprioritized), Blueprint Technologies (Gaming DE — Bellevue, prior).
+- **Senior / II+ / III / IV / manager / VP / advanced (seniority excludes):** WHOOP (Analytics Engineer II), Rocket Companies (Data Engineer II — Seattle), Centene (Data Analyst III), JPMorgan (Data Engineer III — Columbus ×2, Risk-Mgmt DS Associate is kept as the Plano one), DHL Supply Chain (Business Data Analyst II), General Motors (BI and AI Supervisor — Warren MI), The Hartford (VP Applied AI Science, AVP Applied AI Claims, AVP Applied AI — all VP/AVP), Lowe's (Data Engineer — Charlotte; no entry marker, deprioritized to excluded to keep Tier 3 tight), Vagaro-type kept.
+- **Co-op / intern / student / temp / research / clinical (weak timing or non-fit):** University of Pennsylvania (AI Solutions Specialist — Temporary, prior), Michael Baker International (Pavement DA — Temp, Round Rock TX), OLG (DS Student), Ensign College (Student-Employee DA), Cornell (Commercialization DA — prior-adjacent), Northwestern University (Research DA Associate ×2 — Infectious Disease/clinical), University of Illinois Chicago (Clinical Practice DA), Mass General Brigham (Clinical Research Coordinator/DA), Beth Israel Lahey (Healthcare DA — OBGYN, prior), Brevium (DA Assistant — American Fork UT, tiny), Boston Consulting Group (Junior Analyst – BCG Vantage GenAI — consulting-bench), Corning (QA DA — prior), Masco (DA Procurement — niche), Veolia (Meter DA — prior), Vadilal Industries (DA — Bristol PA, tiny food co), CarParts.com (DA), A.P. Moller-Maersk (DA — logistics), Sunsweet Growers (BI Developer — Yuba City, niche), SyntheticFi (Founding DA — founding rung), Burlington Stores (AI DS — Beverly NJ, retail, no entry marker), CVS Health (DS Specialty Ops — no entry marker).
+
+### Bonus — adjacent titles worth adding to the search vocabulary
+- **"Early Career <Title>" and "Jr. <Title>" are the highest-signal net-new markers this run** (Rakuten "Early Career AI Engineer", Vagaro "Jr. AI Engineer", NBCUniversal "Jr. Data Scientist") — alongside the established "<Title> I" / "Associate <Title>" suffixes. Parse for `early career`, `jr.`, `junior`, `associate`, and `<title> i` explicitly when a JD can't be read.
+- **"Data Analyst, Software Engineering Track" (AcuityMD)** — a DA/SWE-crossover title that a plain "Data Analyst" search under-weights but fits the ship-real-systems profile well.
+- **"MLE, Agentic Systems" (ServiceNow)** — the agentic-AI flavor of MLE maps directly to the candidate's LangGraph/agent work; add `agentic` as a qualifier to MLE/AI-Engineer searches.
+- **Cap-exempt employers = lower visa risk (hospitals + universities):** Trinity Health (Assoc DS), Brown University Health (DA) — non-profit health systems are H-1B cap-exempt and routinely hire OPT; weight up.
+- **TX in-state net this run:** JPMorgan (Data Scientist Associate — Plano, DFW-metro), Capgemini (Junior Power BI Developer — Irving, DFW-metro; consultancy caveat). Fidelity Westlake / PayPal Austin / Tata Plano / Travelers Richardson remain standing TX options from prior runs.
+
+### TODO for next (daily) run
+- **CONCURRENCY:** this is the 8th backfill on `main` in ~7 days (07-03 → 07-10). Always
+  `git fetch origin main` and read the LATEST log before de-duping — same-window
+  one-day-apart passes over the same sources are ~90%+ overlap. Beyond URL/jobright-id
+  dedup, **grep each shortlisted company by name** — several this run were same-role
+  reposts under NEW jobright IDs (CyberProof, Applied Materials, UST-Frisco, Astrana),
+  which URL/id dedup alone would have missed.
+- **Source health:** `zapply` + `jobright ENG` remain the workhorses (jobright DA caps at
+  ~7 days; jobright BA still 0 net-new every run). **`speedyapply` dead again this run**
+  (1 row, out-of-window) — but it revived 07-08, so keep spot-checking, don't demote
+  permanently. Keep **curl + local Python parse, NOT WebFetch** (all HTTP 200). Repo
+  branches: jobright repos = `master`; speedyapply + zapply = `main`.
+- **YC fully-mined at this cadence:** both `"Forward Deployed Engineer"` and `"Applied AI
+  Engineer"` queries returned **0 net-new non-founding** this run (all prior-logged; only
+  Founding Arist/Flair Labs were new). Keep running both — the listing set will turn over —
+  but expect 0 until it does.
+- **HN / Reddit / Discord / LinkedIn** all re-confirmed HTTP 000/403 (egress-denied) this
+  run. Highest-value unsolved community gap remains HN "Who is hiring"; no machine-read path
+  works. YC WebSearch is the only functioning community channel and it's currently dry.
+- **JD/visa verification** unchanged #1 structural blocker: greenhouse/ashby/workday/oracle/
+  smartrecruiters/lever/jobright = 403/000. All visa buckets inferred; zapply's H-1B/Sponsor
+  column is the only per-company signal.
+
+---
